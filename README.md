@@ -4,7 +4,7 @@ ExpandedWorld
 Minecraft mod adding "things" to the world, blocks that interact with it, and structures to decorate it
 
 Contributing
-============
+------------
 
 Please do! I am very much in favour of people helping me out, whether it be fixing
 what mistakes I have made, new textures or even new features (may not pull everything).

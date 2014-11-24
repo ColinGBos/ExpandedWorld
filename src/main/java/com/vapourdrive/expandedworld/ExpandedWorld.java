@@ -35,7 +35,6 @@ public class ExpandedWorld
 	public static CommonProxy proxy;
 
 	public static CreativeTabs tabExpandedWorld;
-	public static CreativeTabs tab;
 	public static String configPath;
 
 	public static final Logger log = LogManager.getLogger(EWModInfo.ModName);
