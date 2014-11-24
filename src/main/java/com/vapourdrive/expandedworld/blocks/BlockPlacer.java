@@ -52,9 +52,10 @@ public class BlockPlacer extends Block
 
 		if (stack != null)
 		{
-			Block placeblock = Block.getBlockFromItem(stack.getItem());
-			int placemeta = stack.getItemDamage();
-			placeBlock(world, x, y, z, placeblock, placemeta, direction);
+			Block placeBlock = Block.getBlockFromItem(stack.getItem());
+			int placeMeta = stack.getItemDamage();
+			initPlace(world, x, y, z, player, placeBlock, placeMeta, direction, stack);
+			System.out.println(direction);
 		}
 		return true;
 	}
@@ -70,31 +71,75 @@ public class BlockPlacer extends Block
 		{
 			if (fz > rmin && fz < rmax)
 			{
-				if ((side == 1) || (side == 0)) return 3;
+				if ((side == 1) || (side == 0))
+					return 3;
 			}
 			if (fz > lmin && fz < lmax)
 			{
-				if ((side == 1) || (side == 0)) return 2;
+				if ((side == 1) || (side == 0))
+					return 2;
 			}
 			if (fz > lmax && fz < rmin)
 			{
-				if (side == 1) return 0;
-				if (side == 0) return 1;
+				if (side == 1)
+					return 0;
+				if (side == 0)
+					return 1;
 			}
 		}
 		return 1;
 	}
-	
-	public void placeBlock(World world, int x, int y, int z, Block placeblock, int placemeta, int direction)
+
+	public void initPlace(World world, int x, int y, int z, EntityPlayer player, Block placeBlock, int placeMeta, int direction, ItemStack stack)
 	{
-		switch ( direction )
+		int xPlace = x;
+		int yPlace = y;
+		int zPlace = z;
+		switch (direction)
 		{
-		case 1: 
+		case 0:
 		{
-			
+			yPlace--;
+		}
+		case 1:
+		{
+			yPlace++;
+		}
+		case 2:
+		{
+			zPlace--;
+		}
+		case 3:
+		{
+			zPlace++;
+		}
+		case 4:
+		{
+			xPlace--;
+		}
+		case 5:
+		{
+			xPlace++;
 		}
 		}
-		
+
+		blockPlace(world, xPlace, yPlace, zPlace, player, placeBlock, placeMeta, stack);
+		return;
+
+	}
+
+	public void blockPlace(World world, int xPlace, int yPlace, int zPlace, EntityPlayer player, Block placeBlock, int placeMeta, ItemStack stack)
+	{
+		if (!world.setBlock(xPlace, yPlace, zPlace, placeBlock, placeMeta, 3))
+		{
+			return;
+		}
+		if (world.getBlock(xPlace, yPlace, zPlace) == placeBlock)
+		{
+			placeBlock.onBlockPlacedBy(world, xPlace, yPlace, zPlace, player, stack);
+			placeBlock.onPostBlockPlaced(world, xPlace, yPlace, zPlace, placeMeta);
+		}
+		return;
 	}
 
 }
