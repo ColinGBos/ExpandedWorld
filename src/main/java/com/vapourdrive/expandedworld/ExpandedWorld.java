@@ -45,7 +45,6 @@ public class ExpandedWorld
 
 		configPath = event.getModConfigurationDirectory() + "/expandedworld/";
 		tabExpandedWorld = new EWCreativeTab(CreativeTabs.getNextID(), "tabExpandedWorld");
-		
 
 		MinecraftForge.EVENT_BUS.register(new ForgeEventHooks());
 		FMLCommonHandler.instance().bus().register(new FMLEventHooks());

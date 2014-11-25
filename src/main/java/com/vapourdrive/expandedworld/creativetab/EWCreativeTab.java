@@ -14,7 +14,7 @@ public class EWCreativeTab extends CreativeTabs
 		super(ID, name);
 		setBackgroundImageName("expandedworld.png");
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public String getTabLabel()
@@ -34,17 +34,17 @@ public class EWCreativeTab extends CreativeTabs
 	{
 		return Items.ender_pearl;
 	}
-	
+
 	@Override
-    public boolean hasSearchBar()
-    {
-        return true;
-    }
-	
+	public boolean hasSearchBar()
+	{
+		return true;
+	}
+
 	@Override
-    public int getSearchbarWidth()
-    {
-        return 70;
-    }
+	public int getSearchbarWidth()
+	{
+		return 70;
+	}
 
 }

@@ -44,10 +44,11 @@ public class BlockPlacer extends Block
 
 		if (world.isRemote)
 		{
-			System.out.println("fx " + fx);
-			System.out.println("fy " + fy);
-			System.out.println("fz " + fz);
-			System.out.println(side);
+			System.out.println("fx: " + fx);
+			System.out.println("fy: " + fy);
+			System.out.println("fz: " + fz);
+			System.out.println("side: " + side);
+			System.out.println("direction: " + direction);
 		}
 
 		if (stack != null)
@@ -55,42 +56,94 @@ public class BlockPlacer extends Block
 			Block placeBlock = Block.getBlockFromItem(stack.getItem());
 			int placeMeta = stack.getItemDamage();
 			initPlace(world, x, y, z, player, placeBlock, placeMeta, direction, stack);
-			System.out.println(direction);
 		}
 		return true;
 	}
 
 	public int getDirection(int side, float fx, float fy, float fz)
 	{
-		float lmin = 0.0625F;
-		float lmax = 0.25F;
-		float rmin = 0.75F;
-		float rmax = 0.9375F;
+		float min = 0.0625F;
+		float med1 = 0.25F;
+		float med2 = 0.75F;
+		float max = 0.9375F;
 
-		if (fx > lmax && fx < rmin)
+		if (side == 0 || side == 1)
 		{
-			if (fz > rmin && fz < rmax)
+			if (fx > med1 && fx < med2 && fz > min && fz < med1)
 			{
-				if ((side == 1) || (side == 0))
-					return 3;
+				return 2;
 			}
-			if (fz > lmin && fz < lmax)
+			else if (fx > med2 && fx < max && fz > med1 && fz < med2)
 			{
-				if ((side == 1) || (side == 0))
-					return 2;
+				return 5;
 			}
-			if (fz > lmax && fz < rmin)
+			else if (fx > min && fx < med1 && fz > med1 && fz < med2)
 			{
-				if (side == 1)
-					return 0;
-				if (side == 0)
-					return 1;
+				return 4;
 			}
+					else
+						if (fx > med1 && fx < med2 && fz > med2 && fz < max)
+							return 3;
+						else
+							if (fx > med1 && fx < med2 && fz > med1 && fz < med2)
+							{
+								if (side == 0)
+									return 1;
+								if (side == 1)
+									return 0;
+							}
 		}
+		else
+			if (side == 2 || side == 3)
+			{
+				if (fx > med1 && fx < med2 && fy > min && fy < med1)
+					return 0;
+				else
+					if (fx > med2 && fx < max && fy > med1 && fy < med2)
+						return 5;
+					else
+						if (fx > min && fx < med1 && fy > med1 && fy < med2)
+							return 4;
+						else
+							if (fx > med1 && fx < med2 && fy > med2 && fy < max)
+								return 1;
+							else
+								if (fx > med1 && fx < med2 && fy > med1 && fy < med2)
+								{
+									if (side == 2)
+										return 3;
+									if (side == 3)
+										return 2;
+								}
+			}
+			else
+				if (side == 4 || side == 5)
+				{
+					if (fz > med1 && fz < med2 && fy > min && fy < med1)
+						return 0;
+					else
+						if (fz > med2 && fz < max && fy > med1 && fy < med2)
+							return 3;
+						else
+							if (fz > min && fz < med1 && fy > med1 && fy < med2)
+								return 2;
+							else
+								if (fz > med1 && fz < med2 && fy > med2 && fy < max)
+									return 1;
+								else
+									if (fz > med1 && fz < med2 && fy > med1 && fy < med2)
+									{
+										if (side == 4)
+											return 5;
+										if (side == 5)
+											return 4;
+									}
+				}
 		return 1;
 	}
 
-	public void initPlace(World world, int x, int y, int z, EntityPlayer player, Block placeBlock, int placeMeta, int direction, ItemStack stack)
+	public void initPlace(World world, int x, int y, int z, EntityPlayer player, Block placeBlock, int placeMeta, int direction,
+			ItemStack stack)
 	{
 		int xPlace = x;
 		int yPlace = y;
@@ -98,37 +151,37 @@ public class BlockPlacer extends Block
 		switch (direction)
 		{
 		case 0:
-		{
-			yPlace--;
-		}
+			yPlace = (y - 1);
+			break;
 		case 1:
-		{
-			yPlace++;
-		}
+			yPlace = (y + 1);
+			break;
 		case 2:
-		{
-			zPlace--;
-		}
+			zPlace = (z - 1);
+			break;
 		case 3:
-		{
-			zPlace++;
-		}
+			zPlace = (z + 1);
+			break;
 		case 4:
-		{
-			xPlace--;
-		}
+			xPlace = (x - 1);
+			break;
 		case 5:
-		{
-			xPlace++;
-		}
+			xPlace = (x + 1);
+			break;
+		default:
+			break;
 		}
 
-		blockPlace(world, xPlace, yPlace, zPlace, player, placeBlock, placeMeta, stack);
+		if (world.isAirBlock(xPlace, yPlace, zPlace))
+		{
+			blockPlace(world, xPlace, yPlace, zPlace, player, placeBlock, placeMeta, stack);
+		}
 		return;
 
 	}
 
-	public void blockPlace(World world, int xPlace, int yPlace, int zPlace, EntityPlayer player, Block placeBlock, int placeMeta, ItemStack stack)
+	public void blockPlace(World world, int xPlace, int yPlace, int zPlace, EntityPlayer player, Block placeBlock, int placeMeta,
+			ItemStack stack)
 	{
 		if (!world.setBlock(xPlace, yPlace, zPlace, placeBlock, placeMeta, 3))
 		{

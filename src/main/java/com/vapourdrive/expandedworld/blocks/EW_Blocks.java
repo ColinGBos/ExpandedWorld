@@ -6,11 +6,11 @@ import net.minecraft.block.Block;
 public class EW_Blocks
 {
 	public static Block BlockPlacer;
-	
+
 	public static void init()
 	{
 		BlockPlacer = new BlockPlacer();
-		
+
 		GameRegistry.registerBlock(BlockPlacer, ItemBlockPlacer.class, BlockInfo.BlockPlacerName);
 
 	}
