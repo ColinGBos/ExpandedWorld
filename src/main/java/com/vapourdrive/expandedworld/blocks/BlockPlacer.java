@@ -81,64 +81,74 @@ public class BlockPlacer extends Block
 			{
 				return 4;
 			}
-					else
-						if (fx > med1 && fx < med2 && fz > med2 && fz < max)
-							return 3;
-						else
-							if (fx > med1 && fx < med2 && fz > med1 && fz < med2)
-							{
-								if (side == 0)
-									return 1;
-								if (side == 1)
-									return 0;
-							}
-		}
-		else
-			if (side == 2 || side == 3)
+			else if (fx > med1 && fx < med2 && fz > med2 && fz < max)
 			{
-				if (fx > med1 && fx < med2 && fy > min && fy < med1)
-					return 0;
-				else
-					if (fx > med2 && fx < max && fy > med1 && fy < med2)
-						return 5;
-					else
-						if (fx > min && fx < med1 && fy > med1 && fy < med2)
-							return 4;
-						else
-							if (fx > med1 && fx < med2 && fy > med2 && fy < max)
-								return 1;
-							else
-								if (fx > med1 && fx < med2 && fy > med1 && fy < med2)
-								{
-									if (side == 2)
-										return 3;
-									if (side == 3)
-										return 2;
-								}
+				return 3;
 			}
-			else
-				if (side == 4 || side == 5)
+			else if (fx > med1 && fx < med2 && fz > med1 && fz < med2)
+			{
+				if (side == 0)
 				{
-					if (fz > med1 && fz < med2 && fy > min && fy < med1)
-						return 0;
-					else
-						if (fz > med2 && fz < max && fy > med1 && fy < med2)
-							return 3;
-						else
-							if (fz > min && fz < med1 && fy > med1 && fy < med2)
-								return 2;
-							else
-								if (fz > med1 && fz < med2 && fy > med2 && fy < max)
-									return 1;
-								else
-									if (fz > med1 && fz < med2 && fy > med1 && fy < med2)
-									{
-										if (side == 4)
-											return 5;
-										if (side == 5)
-											return 4;
-									}
+					return 1;
 				}
+				if (side == 1)
+				{
+					return 0;
+				}
+			}
+		}
+		else if (side == 2 || side == 3)
+		{
+			if (fx > med1 && fx < med2 && fy > min && fy < med1)
+			{
+				return 0;
+			}
+			else if (fx > med2 && fx < max && fy > med1 && fy < med2)
+			{
+				return 5;
+			}
+			else if (fx > min && fx < med1 && fy > med1 && fy < med2)
+			{
+				return 4;
+			}
+			else if (fx > med1 && fx < med2 && fy > med2 && fy < max)
+			{
+				return 1;
+			}
+			else if (fx > med1 && fx < med2 && fy > med1 && fy < med2)
+			{
+				if (side == 2)
+					return 3;
+				if (side == 3)
+					return 2;
+			}
+		}
+		else if (side == 4 || side == 5)
+		{
+			if (fz > med1 && fz < med2 && fy > min && fy < med1)
+			{
+				return 0;
+			}
+			else if (fz > med2 && fz < max && fy > med1 && fy < med2)
+			{
+				return 3;
+			}
+			else if (fz > min && fz < med1 && fy > med1 && fy < med2)
+			{
+				return 2;
+			}
+			else if (fz > med1 && fz < med2 && fy > med2 && fy < max)
+			{
+				return 1;
+			}
+			else if (fz > med1 && fz < med2 && fy > med1 && fy < med2)
+			{
+				if (side == 4)
+					return 5;
+				if (side == 5)
+					return 4;
+			}
+		}
 		return 1;
 	}
 
@@ -150,26 +160,26 @@ public class BlockPlacer extends Block
 		int zPlace = z;
 		switch (direction)
 		{
-		case 0:
-			yPlace = (y - 1);
-			break;
-		case 1:
-			yPlace = (y + 1);
-			break;
-		case 2:
-			zPlace = (z - 1);
-			break;
-		case 3:
-			zPlace = (z + 1);
-			break;
-		case 4:
-			xPlace = (x - 1);
-			break;
-		case 5:
-			xPlace = (x + 1);
-			break;
-		default:
-			break;
+			case 0:
+				yPlace = (y - 1);
+				break;
+			case 1:
+				yPlace = (y + 1);
+				break;
+			case 2:
+				zPlace = (z - 1);
+				break;
+			case 3:
+				zPlace = (z + 1);
+				break;
+			case 4:
+				xPlace = (x - 1);
+				break;
+			case 5:
+				xPlace = (x + 1);
+				break;
+			default:
+				break;
 		}
 
 		if (world.isAirBlock(xPlace, yPlace, zPlace))
