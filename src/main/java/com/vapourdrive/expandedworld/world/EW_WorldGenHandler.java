@@ -23,8 +23,8 @@ public class EW_WorldGenHandler implements IWorldGenerator
 	{
 		if (random.nextInt(20) == 0)
 		{
-			int xChunk = chunkX * 16 + 8;
-			int zChunk = chunkZ * 16 + 8;
+			int xChunk = chunkX * 16 + random.nextInt(16);
+			int zChunk = chunkZ * 16 + random.nextInt(16);
 			int chx = xChunk + random.nextInt(16);
 			int chz = zChunk + random.nextInt(16);
 			DarkStoneGen.generate(world, random, chx, 100, chz);

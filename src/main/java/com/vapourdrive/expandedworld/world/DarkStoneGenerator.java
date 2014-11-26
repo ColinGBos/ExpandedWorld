@@ -12,11 +12,24 @@ public class DarkStoneGenerator extends WorldGenerator
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z)
 	{
-		if(world.isAirBlock(x, y, z))
+		for (int i = 0; i < 5; i++)
 		{
-			world.setBlock(x, y, z, Blocks.stone, 0, 3);
+			for (int j = 0; j < 5; j++)
+			{
+				for (int k = 0; k < 5; k++)
+				{
+					if (rand.nextInt(20) == 0 && world.isAirBlock(x + i, y + j, z + k))
+					{
+						world.setBlock(x + i, y + j, z + k, Blocks.diamond_ore, 0, 3);
+					}
+					else if(world.isAirBlock(x + i, y + j, z + k))
+					{
+						world.setBlock(x + i, y + j, z + k, Blocks.stone, 0, 3);
+					}
+				}
+			}
 		}
-		System.out.println("gencheck");
+
 		return true;
 	}
 
