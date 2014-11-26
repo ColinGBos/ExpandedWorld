@@ -15,6 +15,7 @@ import com.vapourdrive.expandedworld.items.EW_Items;
 import com.vapourdrive.expandedworld.materials.EW_Materials;
 import com.vapourdrive.expandedworld.oredictionary.OreDictionaryRegistry;
 import com.vapourdrive.expandedworld.proxies.CommonProxy;
+import com.vapourdrive.expandedworld.world.EW_WorldGenHandler;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -56,7 +57,9 @@ public class ExpandedWorld
 		EW_Materials.init();
 		EW_Items.init();
 		EW_Blocks.init();
+		new EW_WorldGenHandler();
 	}
+
 
 	@EventHandler
 	public void Init(FMLInitializationEvent event)
