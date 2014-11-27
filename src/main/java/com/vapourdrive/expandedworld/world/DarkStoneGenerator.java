@@ -95,8 +95,6 @@ public class DarkStoneGenerator extends WorldGenerator
 				world.setBlock(x - 1, y + i, z + k, Blocks.air, 0, 3);
 				world.setBlock(x + 6, y + i, z + k, Blocks.air, 0, 3);
 			}
-			world.setBlock(x - 1, y = -2, z + i, Blocks.stone, 0, 3);
-			world.setBlock(x + 6, y = -2, z + i, Blocks.stone, 0, 3);
 		}
 
 		for (i = 0; i < 6; i++)
@@ -130,8 +128,6 @@ public class DarkStoneGenerator extends WorldGenerator
 				world.setBlock(x + k, y + i, z - 1, Blocks.air, 0, 3);
 				world.setBlock(x + k, y + i, z + 6, Blocks.air, 0, 3);
 			}
-			world.setBlock(x + k, y = -2, z + 6, Blocks.stone, 0, 3);
-			world.setBlock(x + k, y = -2, z + -1, Blocks.stone, 0, 3);
 		}
 		for (i = 0; i < 6; i++)
 		{
