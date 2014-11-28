@@ -81,6 +81,20 @@ public class DarkStoneGenerator extends WorldGenerator
 	{
 		int i = 0;
 		int k = 0;
+		for (i = -1; i < 2; i++)
+		{
+			for (k = -1; k < 2; k++)
+			{
+				if(!world.isAirBlock(x - 1, y + i, z + k))
+				{
+					world.setBlock(x - 1, y + i, z + k, Blocks.air, 0, 3);
+				}
+				if(!world.isAirBlock(x + 6, y + i, z + k))
+				{
+					world.setBlock(x + 6, y + i, z + k, Blocks.air, 0, 3);
+				}
+			}
+		}
 
 		for (i = 0; i < 6; i++)
 		{
@@ -90,9 +104,9 @@ public class DarkStoneGenerator extends WorldGenerator
 				{
 					if (j > -2 && j < 2 && k > -2 && k < 2)
 					{
-						if(!world.isAirBlock(x + k, y + j, z + i))
+						if(!world.isAirBlock(x + i, y + j, z + k))
 						{
-							world.setBlock(x + k, y + j, z + i, Blocks.air, 0, 3);
+							world.setBlock(x + i, y + j, z + k, Blocks.air, 0, 3);
 						}
 					}
 					else
@@ -109,7 +123,20 @@ public class DarkStoneGenerator extends WorldGenerator
 	{
 		int i = 0;
 		int k = 0;
-
+		for (i = -1; i < 2; i++)
+		{
+			for (k = -1; k < 2; k++)
+			{
+				if(!world.isAirBlock(x + k, y + i, z + 6))
+				{
+					world.setBlock(x + k, y + i, z + 6, Blocks.air, 0, 3);
+				}
+				if(!world.isAirBlock(x + k, y + i, z - 1))
+				{
+					world.setBlock(x + k, y + i, z - 1, Blocks.air, 0, 3);
+				}
+			}
+		}
 		for (i = 0; i < 6; i++)
 		{
 			for (int j = -2; j <= 2; j++)
@@ -125,7 +152,7 @@ public class DarkStoneGenerator extends WorldGenerator
 					}
 					else
 					{
-						placeGenBlock(world, rand, x + i, y + j, z + k);
+						placeGenBlock(world, rand, x + k, y + j, z + i);
 					}
 				}
 			}
