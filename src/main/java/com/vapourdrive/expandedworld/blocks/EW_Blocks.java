@@ -6,12 +6,18 @@ import net.minecraft.block.Block;
 public class EW_Blocks
 {
 	public static Block BlockPlacer;
+	public static Block BlockDarkStone;
+	public static Block BlockDarkStoneLight;
 
 	public static void init()
 	{
 		BlockPlacer = new BlockPlacer();
+		BlockDarkStone = new BlockDarkStone();
+		BlockDarkStoneLight = new BlockDarkStoneLight();
 
 		GameRegistry.registerBlock(BlockPlacer, ItemBlockPlacer.class, BlockInfo.BlockPlacerName);
+		GameRegistry.registerBlock(BlockDarkStone, ItemDarkStone.class, BlockInfo.BlockDarkStoneName);
+		GameRegistry.registerBlock(BlockDarkStoneLight, ItemDarkStoneLight.class, BlockInfo.BlockDarkStoneLightName);
 
 	}
 

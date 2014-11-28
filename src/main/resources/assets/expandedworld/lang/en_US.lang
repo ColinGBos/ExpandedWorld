@@ -1,0 +1,9 @@
+//Blocks
+tile.blockDarkStone0.name=Dark Stone
+tile.blockDarkStone1.name=Cracked Dark Stone
+tile.blockDarkStone2.name=Dark Stone Brick
+tile.darkStoneLight=Dark Stone Light
+
+
+//Items
+item.itemCaveGenerator.name=Cave Generator
