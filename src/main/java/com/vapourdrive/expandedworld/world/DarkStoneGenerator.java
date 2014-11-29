@@ -18,39 +18,8 @@ public class DarkStoneGenerator extends WorldGenerator
 
 	public boolean generateRoom(World world, Random rand, int x, int y, int z, int size, int chance)
 	{
-		int l = (5 + size);
-		int m = (((1 + size) * (1 + size)) * 3);
-		int o = (((2 + size) * (2 + size)) * 3);
-		int p = (2 + size);
-		for (int i = -l; i < l; i++)
-		{
-			for (int j = -(l - 1); j < (l - 1); j++)
-			{
-				for (int k = -l; k < l; k++)
-				{
-					int distVal = (i * i + j * j + k * k);
-					/*
-					 * if (distVal < 48) { if(world.isAirBlock(x + i, y + j, z +
-					 * k)) { world.setBlock(x + i, y + j, z + k, Blocks.air, 0,
-					 * 3); } }
-					 */
-					if (distVal > m && distVal < o && (j >= -p && j <= p))
-					{
-						if (world.isAirBlock(x + i, y + j, z + k))
-						{
-							placeGenBlock(world, rand, x + i, y + j, z + k);
-						}
-					}
-					else if (distVal < o && (j == -p || j == p))
-					{
-						if (world.isAirBlock(x + i, y + j, z + k))
-						{
-							placeGenBlock(world, rand, x + i, y + j, z + k);
-						}
-					}
-				}
-			}
-		}
+		roomCreation(world, rand, x, y, z, size);
+		roomDecoration(world, rand, x, y, z, size);
 
 		if (rand.nextInt(chance) == 0)
 		{
@@ -74,6 +43,59 @@ public class DarkStoneGenerator extends WorldGenerator
 		}
 
 		return true;
+	}
+	
+	public void roomCreation(World world, Random rand, int x, int y, int z, int size)
+	{
+		int l = (5 + size);
+		int m = (((1 + size) * (1 + size)) * 3);
+		int o = (((2 + size) * (2 + size)) * 3);
+		int p = (2 + size);
+		for (int i = -l; i < l; i++)
+		{
+			for (int j = -(l - 1); j < (l - 1); j++)
+			{
+				for (int k = -l; k < l; k++)
+				{
+					int distVal = (i * i + j * j + k * k);
+
+					if (distVal > m && distVal < o && (j >= -p && j <= p))
+					{
+						if (world.isAirBlock(x + i, y + j, z + k))
+						{
+							placeGenBlock(world, rand, x + i, y + j, z + k);
+						}
+					}
+					else if (distVal < o && (j == -p || j == p))
+					{
+						if (world.isAirBlock(x + i, y + j, z + k))
+						{
+							placeGenBlock(world, rand, x + i, y + j, z + k);
+						}
+					}
+				}
+			}
+		}
+		return;
+	}
+	
+	public void roomDecoration(World world, Random rand, int x, int y, int z, int size)
+	{
+		for(int i = -(size + 2); i <= (size + 2); i++)
+		{
+			for (int j = -(size + 2); j <= (size + 2); j++)
+			{
+				if(rand.nextInt(5) != 0)
+				{
+					placeGenBlock(world, rand, x + i, y + (size + 1), z + j);
+					if(rand.nextInt(5) == 0)
+					{
+						placeGenBlock(world, rand, x + i, y + (size), z + j);
+					}
+				}
+			}
+		}
+		return;
 	}
 
 	public void generateHallX(World world, Random rand, int x, int y, int z)
