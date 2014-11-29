@@ -2,11 +2,10 @@ package com.vapourdrive.expandedworld.world;
 
 import java.util.Random;
 
-import com.vapourdrive.expandedworld.blocks.EW_Blocks;
-
-import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import com.vapourdrive.expandedworld.blocks.EW_Blocks;
 
 public class DarkStoneGenerator extends WorldGenerator
 {
@@ -14,11 +13,10 @@ public class DarkStoneGenerator extends WorldGenerator
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z)
 	{
-		generateRoom(world, rand, x, y, z, 3, 3);
-		return true;
+		return generateRoom(world, rand, x, y, z, 3, 3);
 	}
 
-	public static boolean generateRoom(World world, Random rand, int x, int y, int z, int size, int chance)
+	public boolean generateRoom(World world, Random rand, int x, int y, int z, int size, int chance)
 	{
 		int l = (5 + size);
 		int m = (((1 + size) * (1 + size)) * 3);
@@ -58,43 +56,30 @@ public class DarkStoneGenerator extends WorldGenerator
 		{
 			return true;
 		}
+
 		int next = rand.nextInt(3) + 1;
-		generateRoom(world, rand, x + (13 + (next * 2)), y - (size - next), z, next, 3);
+		generateRoom(world, rand, (x + 13 + next + size), y - (size - next), z, next, 3);
 		generateHallX(world, rand, x + (4 + size), y - (size), z);
 
 		if (rand.nextInt(3) == 0)
 		{
-			generateRoom(world, rand, x, y - (size - next), z + (13 + (next * 2)), next, 1);
+			generateRoom(world, rand, x, y - (size - next), (z + 13 + next + size), next, 1);
 			generateHallZ(world, rand, x, y - (size), z + (4 + size));
 		}
 
 		if (rand.nextInt(3) == 0)
 		{
-			generateRoom(world, rand, x, y - (size - next), z - (13 + (next * 2)), next, 1);
+			generateRoom(world, rand, x, y - (size - next), z - (13 + next + size), next, 1);
 			generateHallZ(world, rand, x, y - (size), z - (9 + size));
 		}
 
 		return true;
 	}
 
-	public static boolean generateHallX(World world, Random rand, int x, int y, int z)
+	public void generateHallX(World world, Random rand, int x, int y, int z)
 	{
 		int i = 0;
 		int k = 0;
-		for (i = -1; i < 2; i++)
-		{
-			for (k = -1; k < 2; k++)
-			{
-				if(!world.isAirBlock(x - 1, y + i, z + k))
-				{
-					world.setBlock(x - 1, y + i, z + k, Blocks.air, 0, 3);
-				}
-				if(!world.isAirBlock(x + 6, y + i, z + k))
-				{
-					world.setBlock(x + 6, y + i, z + k, Blocks.air, 0, 3);
-				}
-			}
-		}
 
 		for (i = 0; i < 6; i++)
 		{
@@ -104,9 +89,9 @@ public class DarkStoneGenerator extends WorldGenerator
 				{
 					if (j > -2 && j < 2 && k > -2 && k < 2)
 					{
-						if(!world.isAirBlock(x + i, y + j, z + k))
+						if (!world.isAirBlock(x + i, y + j, z + k))
 						{
-							world.setBlock(x + i, y + j, z + k, Blocks.air, 0, 3);
+							world.setBlockToAir(x + i, y + j, z + k);
 						}
 					}
 					else
@@ -116,27 +101,36 @@ public class DarkStoneGenerator extends WorldGenerator
 				}
 			}
 		}
-		return true;
-	}
-
-	public static boolean generateHallZ(World world, Random rand, int x, int y, int z)
-	{
-		int i = 0;
-		int k = 0;
 		for (i = -1; i < 2; i++)
 		{
 			for (k = -1; k < 2; k++)
 			{
-				if(!world.isAirBlock(x + k, y + i, z + 6))
+				if (!world.isAirBlock(x - 1, y + i, z + k))
 				{
-					world.setBlock(x + k, y + i, z + 6, Blocks.air, 0, 3);
+					world.setBlockToAir(x - 1, y + i, z + k);
 				}
-				if(!world.isAirBlock(x + k, y + i, z - 1))
+				if (!world.isAirBlock(x - 2, y + i, z + k))
 				{
-					world.setBlock(x + k, y + i, z - 1, Blocks.air, 0, 3);
+					world.setBlockToAir(x - 2, y + i, z + k);
+				}
+				if (!world.isAirBlock(x + 6, y + i, z + k))
+				{
+					world.setBlockToAir(x + 6, y + i, z + k);
+				}
+				if (!world.isAirBlock(x + 7, y + i, z + k))
+				{
+					world.setBlockToAir(x + 7, y + i, z + k);
 				}
 			}
 		}
+		return;
+	}
+
+	public void generateHallZ(World world, Random rand, int x, int y, int z)
+	{
+		int i = 0;
+		int k = 0;
+
 		for (i = 0; i < 6; i++)
 		{
 			for (int j = -2; j <= 2; j++)
@@ -145,9 +139,9 @@ public class DarkStoneGenerator extends WorldGenerator
 				{
 					if (j > -2 && j < 2 && k > -2 && k < 2)
 					{
-						if(!world.isAirBlock(x + k, y + j, z + i))
+						if (!world.isAirBlock(x + k, y + j, z + i))
 						{
-							world.setBlock(x + k, y + j, z + i, Blocks.air, 0, 3);
+							world.setBlockToAir(x + k, y + j, z + i);
 						}
 					}
 					else
@@ -157,29 +151,56 @@ public class DarkStoneGenerator extends WorldGenerator
 				}
 			}
 		}
-		return true;
+		for (i = -1; i < 2; i++)
+		{
+			for (k = -1; k < 2; k++)
+			{
+				if (!world.isAirBlock(x + k, y + i, z + 6))
+				{
+					world.setBlockToAir(x + k, y + i, z + 6);
+				}
+				if (!world.isAirBlock(x + k, y + i, z + 7))
+				{
+					world.setBlockToAir(x + k, y + i, z + 7);
+				}
+				if (!world.isAirBlock(x + k, y + i, z - 1))
+				{
+					world.setBlockToAir(x + k, y + i, z - 1);
+				}
+				if (!world.isAirBlock(x + k, y + i, z - 2))
+				{
+					world.setBlockToAir(x + k, y + i, z - 2);
+				}
+			}
+		}
+		return;
 	}
 
-	public static boolean placeGenBlock(World world, Random rand, int x, int y, int z)
+	public void placeGenBlock(World world, Random rand, int x, int y, int z)
 	{
-		if (rand.nextInt(16) == 0)
+		int random = rand.nextInt(5);
+		
+		if (random == 0)
 		{
 			world.setBlock(x, y, z, EW_Blocks.BlockDarkStoneLight, 0, 3);
+			return;
 		}
-		else if (rand.nextInt(3) == 0)
+		if (random == 1)
 		{
 			world.setBlock(x, y, z, EW_Blocks.BlockDarkStone, 1, 3);
+			return;
 		}
-		else if (rand.nextInt(3) == 0)
+		if (random == 2)
 		{
 			world.setBlock(x, y, z, EW_Blocks.BlockDarkStone, 2, 3);
+			return;
 		}
 		else
 		{
 			world.setBlock(x, y, z, EW_Blocks.BlockDarkStone, 0, 3);
+			return;
 		}
 
-		return true;
 	}
 
 }

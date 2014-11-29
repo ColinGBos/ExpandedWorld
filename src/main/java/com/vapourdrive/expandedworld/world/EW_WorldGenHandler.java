@@ -21,16 +21,14 @@ public class EW_WorldGenHandler implements IWorldGenerator
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
 	{
-		/*
-		if (random.nextInt(1000) == 0)
+		if (random.nextInt(100) == 0)
 		{
 			int xChunk = chunkX * 16 + random.nextInt(16);
 			int zChunk = chunkZ * 16 + random.nextInt(16);
 			int chx = xChunk + random.nextInt(16);
 			int chz = zChunk + random.nextInt(16);
-			DarkStoneGen.generate(world, random, chx, 20, chz);
+			DarkStoneGen.generate(world, random, chx, 9, chz);
 		}
-		*/
 	}
 
 }
