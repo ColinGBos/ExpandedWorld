@@ -57,6 +57,7 @@ public class DarkStoneGenerator extends WorldGenerator
 		int m = (((1 + size) * (1 + size)) * 3);
 		int o = (((2 + size) * (2 + size)) * 3);
 		int p = (2 + size);
+		
 		for (int i = -l; i < l; i++)
 		{
 			for (int j = -(l - 1); j < (l - 1); j++)
@@ -110,6 +111,7 @@ public class DarkStoneGenerator extends WorldGenerator
 				}
 			}
 		}
+		
 		for (i = -1; i < 2; i++)
 		{
 			for (k = -1; k < 2; k++)
@@ -160,6 +162,7 @@ public class DarkStoneGenerator extends WorldGenerator
 				}
 			}
 		}
+		
 		for (i = -1; i < 2; i++)
 		{
 			for (k = -1; k < 2; k++)
@@ -209,7 +212,6 @@ public class DarkStoneGenerator extends WorldGenerator
 			world.setBlock(x, y, z, EW_Blocks.BlockDarkStone, 0, 3);
 			return;
 		}
-
 	}
 	
 	public void roomDecoration(World world, Random rand, int x, int y, int z, int size)
@@ -256,6 +258,7 @@ public class DarkStoneGenerator extends WorldGenerator
 	{
 		int i;
 		int j;
+		
 		for(i = -2; i <= 2; i++)
 		{
 			for (j = -2; j <= 2; j++)
@@ -267,10 +270,10 @@ public class DarkStoneGenerator extends WorldGenerator
 				else
 				{
 					world.setBlockToAir(x + i, y - 5, z + j);
-
 				}
 			}
 		}
+		
 		for (i = -5; i <= -3; i++)
 		{
 			world.setBlock(x, y + i, z, EW_Blocks.BlockDarkStone, 0, 3);
