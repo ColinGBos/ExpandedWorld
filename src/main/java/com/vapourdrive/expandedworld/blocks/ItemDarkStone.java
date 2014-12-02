@@ -29,5 +29,4 @@ public class ItemDarkStone extends EWItemBlock
 		return super.getUnlocalizedName() + meta;
 	}
 
-
 }

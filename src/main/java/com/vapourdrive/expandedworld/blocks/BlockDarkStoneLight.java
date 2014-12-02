@@ -15,7 +15,7 @@ public class BlockDarkStoneLight extends EWBlock
 		this.setLightLevel(1.0F);
 		this.setBlockName(BlockInfo.BlockDarkStoneLightName);
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register)

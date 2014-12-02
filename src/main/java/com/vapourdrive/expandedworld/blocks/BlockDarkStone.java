@@ -16,12 +16,13 @@ public class BlockDarkStone extends EWBlock
 {
 
 	public static IIcon[] blocks;
+
 	protected BlockDarkStone()
 	{
 		super(Material.rock);
 		setBlockName(BlockInfo.BlockDarkStoneName);
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register)

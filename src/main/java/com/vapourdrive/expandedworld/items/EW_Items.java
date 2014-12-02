@@ -6,10 +6,11 @@ import net.minecraft.item.Item;
 public class EW_Items
 {
 	public static Item CaveGenerator;
+
 	public static void init()
 	{
 		CaveGenerator = new ItemCaveGenerator();
-		
+
 		GameRegistry.registerItem(CaveGenerator, ItemInfo.CaveGeneratorName);
 
 	}

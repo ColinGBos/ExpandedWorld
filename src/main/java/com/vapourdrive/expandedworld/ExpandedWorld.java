@@ -60,7 +60,6 @@ public class ExpandedWorld
 		new EW_WorldGenHandler();
 	}
 
-
 	@EventHandler
 	public void Init(FMLInitializationEvent event)
 	{

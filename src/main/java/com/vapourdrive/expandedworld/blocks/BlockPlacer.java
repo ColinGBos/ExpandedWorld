@@ -48,7 +48,7 @@ public class BlockPlacer extends Block
 			int placeMeta = stack.getItemDamage();
 			if (initPlace(world, x, y, z, player, placeMeta, direction, side, stack, fx, fy, fz))
 			{
-				if(player.capabilities.isCreativeMode)
+				if (player.capabilities.isCreativeMode)
 				{
 					stack.stackSize++;
 				}
@@ -58,7 +58,7 @@ public class BlockPlacer extends Block
 		return false;
 	}
 
-	public boolean initPlace(World world, int x, int y, int z, EntityPlayer player, int placeMeta, int direction, int side, 
+	public boolean initPlace(World world, int x, int y, int z, EntityPlayer player, int placeMeta, int direction, int side,
 			ItemStack stack, float fx, float fy, float fz)
 	{
 		int xPlace = x;
