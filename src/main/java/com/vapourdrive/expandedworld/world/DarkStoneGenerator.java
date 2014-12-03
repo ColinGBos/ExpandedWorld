@@ -1,10 +1,15 @@
 package com.vapourdrive.expandedworld.world;
 
+import static net.minecraftforge.common.ChestGenHooks.DUNGEON_CHEST;
+
 import java.util.Random;
 
 import net.minecraft.init.Blocks;
+import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.common.ChestGenHooks;
 
 import com.vapourdrive.expandedworld.blocks.EW_Blocks;
 
@@ -194,22 +199,22 @@ public class DarkStoneGenerator extends WorldGenerator
 
 		if (random == 0)
 		{
-			world.setBlock(x, y, z, EW_Blocks.BlockDarkStoneLight, 0, 3);
+			world.setBlock(x, y, z, EW_Blocks.BlockDarkStoneLight, 0, 2);
 			return;
 		}
 		if (random == 1)
 		{
-			world.setBlock(x, y, z, EW_Blocks.BlockDarkStone, 1, 3);
+			world.setBlock(x, y, z, EW_Blocks.BlockDarkStone, 1, 2);
 			return;
 		}
 		if (random == 2)
 		{
-			world.setBlock(x, y, z, EW_Blocks.BlockDarkStone, 2, 3);
+			world.setBlock(x, y, z, EW_Blocks.BlockDarkStone, 2, 2);
 			return;
 		}
 		else
 		{
-			world.setBlock(x, y, z, EW_Blocks.BlockDarkStone, 0, 3);
+			world.setBlock(x, y, z, EW_Blocks.BlockDarkStone, 0, 2);
 			return;
 		}
 	}
@@ -251,6 +256,12 @@ public class DarkStoneGenerator extends WorldGenerator
 				createFountain(world, rand, x, y, z);
 			}
 		}
+		
+		if (type == 1)
+		{
+			genChestPlan(world, rand, x, y, z, size);
+		}
+		
 		return;
 	}
 
@@ -265,7 +276,7 @@ public class DarkStoneGenerator extends WorldGenerator
 			{
 				if (!(j > -2 && j < 2 && i > -2 && i < 2))
 				{
-					world.setBlock(x + i, y - 5, z + j, EW_Blocks.BlockDarkStone, 1, 3);
+					world.setBlock(x + i, y - 5, z + j, EW_Blocks.BlockDarkStone, 1, 2);
 				}
 				else
 				{
@@ -276,11 +287,49 @@ public class DarkStoneGenerator extends WorldGenerator
 
 		for (i = -5; i <= -3; i++)
 		{
-			world.setBlock(x, y + i, z, EW_Blocks.BlockDarkStone, 0, 3);
+			world.setBlock(x, y + i, z, EW_Blocks.BlockDarkStone, 0, 2);
 		}
-		world.setBlock(x, y - 2, z, EW_Blocks.BlockDarkStoneLight, 0, 3);
-		world.setBlock(x, y - 1, z, Blocks.flowing_water, 0, 3);
+		world.setBlock(x, y - 2, z, EW_Blocks.BlockDarkStoneLight, 0, 2);
+		world.setBlock(x, y - 1, z, Blocks.flowing_water, 0, 2);
 
+		return;
+	}
+	
+	public void genChestPlan(World world, Random rand, int x, int y, int z, int size)
+	{
+		int height = y - 1 - size;
+        if (rand.nextInt(3) != 0)
+		{
+        	genChest(world, rand, x + 2 + size, height, z + 2);
+		}
+        if (rand.nextInt(3) != 0)
+        {
+        	genChest(world, rand, x - 2 - size, height, z - 2);
+        }
+        if (rand.nextInt(3) != 0)
+		{
+        	genChest(world, rand, x + 2, height, z + 2 + size);
+		}
+        if (rand.nextInt(3) != 0)
+        {
+        	genChest(world, rand, x - 2, height, z - 2 - size);
+        }
+        return;
+		
+	}
+	
+	public void genChest(World world, Random rand, int x, int y, int z)
+	{
+        world.setBlock(x, y, z, Blocks.chest, 0, 2);
+        TileEntityChest tileentitychest = (TileEntityChest)world.getTileEntity(x, y, z);
+
+        if (tileentitychest != null)
+        {
+            WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(DUNGEON_CHEST, rand), tileentitychest, ChestGenHooks.getCount(DUNGEON_CHEST, rand)/3);
+            WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(ChestGenHooks.MINESHAFT_CORRIDOR, rand), tileentitychest, ChestGenHooks.getCount(ChestGenHooks.MINESHAFT_CORRIDOR, rand)/3);
+            WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(ChestGenHooks.VILLAGE_BLACKSMITH, rand), tileentitychest, ChestGenHooks.getCount(ChestGenHooks.VILLAGE_BLACKSMITH, rand)/3);
+
+        }
 		return;
 	}
 

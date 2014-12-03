@@ -11,11 +11,13 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class EW_WorldGenHandler implements IWorldGenerator
 {
 	private WorldGenerator DarkStoneGen;
+	//private WorldGenerator ChestGen;
 
 	public EW_WorldGenHandler()
 	{
 		GameRegistry.registerWorldGenerator(this, 1);
 		DarkStoneGen = new DarkStoneGenerator();
+		//ChestGen = new ChestGenerator();
 	}
 
 	@Override
