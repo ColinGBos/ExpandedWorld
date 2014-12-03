@@ -256,12 +256,20 @@ public class DarkStoneGenerator extends WorldGenerator
 				createFountain(world, rand, x, y, z);
 			}
 		}
-		
+
 		if (type == 1)
 		{
 			genChestPlan(world, rand, x, y, z, size);
 		}
-		
+
+		if (type == 2)
+		{
+			if (size == 2 || size == 3)
+			{
+				createGarden(world, rand, x, y, z, size);
+			}
+		}
+
 		return;
 	}
 
@@ -294,42 +302,68 @@ public class DarkStoneGenerator extends WorldGenerator
 
 		return;
 	}
-	
+
 	public void genChestPlan(World world, Random rand, int x, int y, int z, int size)
 	{
 		int height = y - 1 - size;
-        if (rand.nextInt(3) != 0)
+		if (rand.nextInt(3) != 0)
 		{
-        	genChest(world, rand, x + 2 + size, height, z + 2);
+			genChest(world, rand, x + 2 + size, height, z + 2);
 		}
-        if (rand.nextInt(3) != 0)
-        {
-        	genChest(world, rand, x - 2 - size, height, z - 2);
-        }
-        if (rand.nextInt(3) != 0)
+		if (rand.nextInt(3) != 0)
 		{
-        	genChest(world, rand, x + 2, height, z + 2 + size);
+			genChest(world, rand, x - 2 - size, height, z - 2);
 		}
-        if (rand.nextInt(3) != 0)
-        {
-        	genChest(world, rand, x - 2, height, z - 2 - size);
-        }
-        return;
-		
+		if (rand.nextInt(3) != 0)
+		{
+			genChest(world, rand, x + 2, height, z + 2 + size);
+		}
+		if (rand.nextInt(3) != 0)
+		{
+			genChest(world, rand, x - 2, height, z - 2 - size);
+		}
+		return;
+
 	}
-	
+
 	public void genChest(World world, Random rand, int x, int y, int z)
 	{
-        world.setBlock(x, y, z, Blocks.chest, 0, 2);
-        TileEntityChest tileentitychest = (TileEntityChest)world.getTileEntity(x, y, z);
+		world.setBlock(x, y, z, Blocks.chest, 0, 2);
+		TileEntityChest tileentitychest = (TileEntityChest) world.getTileEntity(x, y, z);
 
-        if (tileentitychest != null)
-        {
-            WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(DUNGEON_CHEST, rand), tileentitychest, ChestGenHooks.getCount(DUNGEON_CHEST, rand)/3);
-            WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(ChestGenHooks.MINESHAFT_CORRIDOR, rand), tileentitychest, ChestGenHooks.getCount(ChestGenHooks.MINESHAFT_CORRIDOR, rand)/3);
-            WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(ChestGenHooks.VILLAGE_BLACKSMITH, rand), tileentitychest, ChestGenHooks.getCount(ChestGenHooks.VILLAGE_BLACKSMITH, rand)/3);
+		if (tileentitychest != null)
+		{
+			WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(DUNGEON_CHEST, rand), tileentitychest,
+					ChestGenHooks.getCount(DUNGEON_CHEST, rand) / 3);
+			WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(ChestGenHooks.MINESHAFT_CORRIDOR, rand),
+					tileentitychest, ChestGenHooks.getCount(ChestGenHooks.MINESHAFT_CORRIDOR, rand) / 3);
+			WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(ChestGenHooks.VILLAGE_BLACKSMITH, rand),
+					tileentitychest, ChestGenHooks.getCount(ChestGenHooks.VILLAGE_BLACKSMITH, rand) / 3);
 
-        }
+		}
+		return;
+	}
+
+	public void createGarden(World world, Random rand, int x, int y, int z, int size)
+	{
+		int height = y - 1 - size;
+		for (int i = 1 - size; i <= -1 + size; i++)
+		{
+			world.setBlock(x + i, height - 1, z + 2, Blocks.farmland, 0, 2);
+			world.setBlock(x + i, height - 1, z + 1, Blocks.farmland, 0, 2);
+			world.setBlock(x + i, height - 1, z - 1, Blocks.farmland, 0, 2);
+			world.setBlock(x + i, height - 1, z - 2, Blocks.farmland, 0, 2);
+			world.setBlock(x + i, height, z + 2, Blocks.carrots, 0, 2);
+			world.setBlock(x + i, height, z + 1, Blocks.potatoes, 0, 2);
+			world.setBlock(x + i, height, z - 1, Blocks.carrots, 0, 2);
+			world.setBlock(x + i, height, z - 2, Blocks.potatoes, 0, 2);
+		}
+
+		world.setBlock(x, height - 1, z + 3, Blocks.water, 0, 2);
+		world.setBlock(x, height - 1, z - 3, Blocks.water, 0, 2);
+		world.setBlock(x, height, z + 3, EW_Blocks.BlockDarkStone, 0, 2);
+		world.setBlock(x, height, z - 3, EW_Blocks.BlockDarkStone, 0, 2);
+
 		return;
 	}
 
