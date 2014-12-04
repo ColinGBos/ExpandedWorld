@@ -11,6 +11,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class EW_WorldGenHandler implements IWorldGenerator
 {
 	private WorldGenerator DarkStoneGen;
+	//private WorldGenerator FarmerHut;
 
 	// private WorldGenerator ChestGen;
 
@@ -18,6 +19,7 @@ public class EW_WorldGenHandler implements IWorldGenerator
 	{
 		GameRegistry.registerWorldGenerator(this, 1);
 		DarkStoneGen = new DarkStoneGenerator();
+		//FarmerHut = new FarmerHutGenerator();
 		// ChestGen = new ChestGenerator();
 	}
 

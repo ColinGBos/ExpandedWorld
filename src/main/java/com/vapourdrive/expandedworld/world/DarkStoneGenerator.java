@@ -232,7 +232,7 @@ public class DarkStoneGenerator extends WorldGenerator
 		{
 			for (int j = -(size + 2); j <= (size + 2); j++)
 			{
-				if (rand.nextInt(5) != 0)
+				if (rand.nextInt(8) != 0)
 				{
 					placeGenBlock(world, rand, x + i, y + (size + 1), z + j);
 					if (rand.nextInt(7) == 0)
@@ -257,7 +257,7 @@ public class DarkStoneGenerator extends WorldGenerator
 			}
 		}
 
-		if (type == 1)
+		if (type == 1 && size != 0)
 		{
 			genChestPlan(world, rand, x, y, z, size);
 		}
@@ -357,12 +357,21 @@ public class DarkStoneGenerator extends WorldGenerator
 			world.setBlock(x + i, height, z + 1, Blocks.potatoes, 0, 2);
 			world.setBlock(x + i, height, z - 1, Blocks.carrots, 0, 2);
 			world.setBlock(x + i, height, z - 2, Blocks.potatoes, 0, 2);
+			if (i != 0 && size == 3)
+			{
+				world.setBlock(x + i, height, z + 3, Blocks.fence, 0, 2);
+				world.setBlock(x + i, height, z - 3, Blocks.fence, 0, 2);
+				world.setBlock(x + 3, height, z + i, Blocks.fence, 0, 2);
+				world.setBlock(x - 3, height, z + i, Blocks.fence, 0, 2);
+			}
 		}
 
 		world.setBlock(x, height - 1, z + 3, Blocks.water, 0, 2);
 		world.setBlock(x, height - 1, z - 3, Blocks.water, 0, 2);
-		world.setBlock(x, height, z + 3, EW_Blocks.BlockDarkStone, 0, 2);
-		world.setBlock(x, height, z - 3, EW_Blocks.BlockDarkStone, 0, 2);
+		world.setBlock(x + 3, height, z + 3, Blocks.fence, 0, 2);
+		world.setBlock(x + 3, height, z - 3, Blocks.fence, 0, 2);
+		world.setBlock(x - 3, height, z + 3, Blocks.fence, 0, 2);
+		world.setBlock(x - 3, height, z - 3, Blocks.fence, 0, 2);
 
 		return;
 	}
