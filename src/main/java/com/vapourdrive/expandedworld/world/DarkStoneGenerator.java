@@ -52,6 +52,8 @@ public class DarkStoneGenerator extends WorldGenerator
 			generateRoom(world, rand, x, y - (size - next), z - (13 + next + size), next, 1);
 			generateHallZ(world, rand, x, y - (size), z - (9 + size));
 		}
+		
+		//world.getChunkFromChunkCoords(x, z).setChunkModified();
 
 		return true;
 	}
