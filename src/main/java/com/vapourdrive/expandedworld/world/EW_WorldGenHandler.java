@@ -33,16 +33,19 @@ public class EW_WorldGenHandler implements IWorldGenerator
 		int zChunk = chunkZ * 16 + random.nextInt(16);
 		int chx = xChunk + random.nextInt(16);
 		int chz = zChunk + random.nextInt(16);
-		
+
 		BiomeGenBase Biome = world.getBiomeGenForCoords(chx, chz);
-		
+
 		if (random.nextInt(100) == 0)
 		{
-			DarkStoneGen.generate(world, random, chx, 9, chz);
+			// DarkStoneGen.generate(world, random, chx, 9, chz);
 		}
-		if (random.nextInt(100) == 0 && BiomeDictionary.isBiomeOfType(Biome, Type.PLAINS))
+		if (random.nextInt(100) == 0)
 		{
+			// if (BiomeDictionary.isBiomeOfType(Biome, Type.PLAINS))
+			// {
 			FarmerHut.generate(world, random, chx, world.getChunkHeightMapMinimum(chx, chz), chz);
+			// }
 		}
 	}
 
