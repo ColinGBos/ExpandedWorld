@@ -3,25 +3,62 @@ package com.vapourdrive.expandedworld.world;
 import java.util.Random;
 
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemDoor;
+import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import com.vapourdrive.expandedworld.world.chests.FoodChest;
 
 public class FarmerHutGenerator extends WorldGenerator
 {
 	@Override
 	public boolean generate(World world, Random rand, int x, int y, int z)
 	{
+		startGenerate(world, rand, x, y, z);
+
+		return true;
+	}
+	
+	public static boolean startGenerate(World world, Random rand, int x, int y, int z)
+	{
+		world.setBlock(x, world.getTopSolidOrLiquidBlock(x, z) + 40, z, Blocks.stone, 0, 2);
+
+		buildingCreation(world, rand, x, y, z);
+		buildingDecoration(world, rand, x, y, z);
+		
+		if(rand.nextInt(5) != 0)
+		{
+			pastureCreation(world, rand, x + 15, y, z);
+		}
+		
+		return true;
+	}
+
+	public static boolean buildingCreation(World world, Random rand, int x, int y, int z)
+	{
 		int base = Math.max(world.getTopSolidOrLiquidBlock(x, z), world.provider.getAverageGroundLevel());
-		world.setBlock(x, base + 40, z, Blocks.stone, 0, 2);
 
 		generateBasement(world, rand, x, base - 1, z);
 		generateHouse(world, rand, x, base, z);
 		generateRoof(world, rand, x, base, z);
-
 		return true;
 	}
 
-	public boolean generateBasement(World world, Random rand, int x, int base, int z)
+	public static boolean pastureCreation(World world, Random rand, int x, int y, int z)
+	{
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	public static boolean buildingDecoration(World world, Random rand, int x, int base, int z)
+	{
+		placeInteriors(world, rand, x, base, z);
+		return true;
+	}
+
+	public static boolean generateBasement(World world, Random rand, int x, int base, int z)
 	{
 		int i;
 		int j;
@@ -47,7 +84,7 @@ public class FarmerHutGenerator extends WorldGenerator
 		return true;
 	}
 
-	public boolean generateHouse(World world, Random rand, int x, int base, int z)
+	public static boolean generateHouse(World world, Random rand, int x, int base, int z)
 	{
 		int i;
 		int j;
@@ -98,7 +135,7 @@ public class FarmerHutGenerator extends WorldGenerator
 		return true;
 	}
 
-	private boolean generateRoof(World world, Random rand, int x, int base, int z)
+	public static boolean generateRoof(World world, Random rand, int x, int base, int z)
 	{
 		int i;
 		int j;
@@ -120,6 +157,40 @@ public class FarmerHutGenerator extends WorldGenerator
 					}
 				}
 			}
+		}
+		return true;
+	}
+
+	public static boolean placeInteriors(World world, Random rand, int x, int base, int z)
+	{
+		placeSupplyChest(world, rand, x + 7, base, z + 5, 0);
+
+		placeDoor(world, rand, x, base, z);
+		return true;
+	}
+
+	public static boolean placeDoor(World world, Random rand, int x, int base, int z)
+	{
+		world.setBlockToAir(x, base, z + 4);
+		world.setBlockToAir(x, base + 1, z + 4);
+		ItemDoor.placeDoorBlock(world, x, base, z + 4, 0, Blocks.wooden_door);
+
+		return true;
+	}
+
+	public static boolean placeSupplyChest(World world, Random rand, int x, int base, int z, int check)
+	{
+		world.setBlock(x, base, z, Blocks.chest, 0, 2);
+		TileEntityChest tileentitychest = (TileEntityChest) world.getTileEntity(x, base, z);
+
+		if (tileentitychest != null)
+		{
+            WeightedRandomChestContent.generateChestContents(rand, FoodChest.farmerchest, tileentitychest, 5);
+            WeightedRandomChestContent.generateChestContents(rand, FoodChest.farmerchest, tileentitychest, 5);
+		}
+		if (rand.nextInt(10) == 0 && check == 0)
+		{
+			placeSupplyChest(world, rand, x, base, z + 1, 1);
 		}
 		return true;
 	}
