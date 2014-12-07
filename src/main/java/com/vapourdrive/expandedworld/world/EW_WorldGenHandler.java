@@ -38,9 +38,9 @@ public class EW_WorldGenHandler implements IWorldGenerator
 
 		if (random.nextInt(100) == 0)
 		{
-			// DarkStoneGen.generate(world, random, chx, 9, chz);
+			DarkStoneGen.generate(world, random, chx, 9, chz);
 		}
-		if (random.nextInt(35) == 0)
+		if (random.nextInt(100) == 0)
 		{
 			// if (BiomeDictionary.isBiomeOfType(Biome, Type.PLAINS))
 			// {

@@ -3,7 +3,7 @@ package com.vapourdrive.expandedworld.world;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemDoor;
 import net.minecraft.tileentity.TileEntityChest;
@@ -261,9 +261,11 @@ public class FarmerHutGenerator extends WorldGenerator
 		{
 			if (rand.nextInt(6) != 0)
 			{
-				EntityVillager entityvillager = new EntityVillager(world, 0);
-                entityvillager.setLocationAndAngles((double)x + i + 1, (double)base + 1, (double)z + i + 1, 0.0F, 0.0F);
-                world.spawnEntityInWorld(entityvillager);
+				int posX = rand.nextInt(3) + 2;
+				int posY = rand.nextInt(3) + 2;
+				EntityCow entitycow = new EntityCow(world);
+                entitycow.setLocationAndAngles((double)x + posX, (double)base + 1, (double)z + posY, 0.0F, 0.0F);
+                world.spawnEntityInWorld(entitycow);
 			}
 		}
 		return true;
