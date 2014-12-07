@@ -19,7 +19,7 @@ public class ItemCaveGenerator extends Item
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float fx, float fy, float fz)
 	{
 		FarmerHutGenerator.startGenerate(world, world.rand, x, y, z);
-		return false;
+		return true;
 	}
 
 }

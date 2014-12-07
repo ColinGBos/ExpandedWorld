@@ -1,5 +1,9 @@
 package com.vapourdrive.expandedworld.utils;
 
+import java.util.Random;
+
+import net.minecraft.world.World;
+
 public class Utils
 {
 	public static int getDirection(int side, float fx, float fy, float fz)
@@ -92,5 +96,36 @@ public class Utils
 			}
 		}
 		return 1;
+	}
+	
+	public static boolean isLevelGround(World world, Random rand, int x, int maxX, int z, int maxZ, int difference)
+	{
+		int i;
+		int j;
+		int minHeight = world.getTopSolidOrLiquidBlock(x, z);
+		int maxHeight = minHeight;
+		
+		for (i = -2; i < maxX; i++)
+		{
+			for (j = -2; j < maxZ; j++)
+			{
+				int height = world.getTopSolidOrLiquidBlock(x + i, z + j);
+				if (height > maxHeight)
+				{
+					maxHeight = height;
+				}
+				else if (height < minHeight)
+				{
+					minHeight = height;
+				}
+			}
+		}
+		
+		if ((maxHeight - minHeight) < difference)
+		{
+			return true;
+		}
+		
+		return false;
 	}
 }

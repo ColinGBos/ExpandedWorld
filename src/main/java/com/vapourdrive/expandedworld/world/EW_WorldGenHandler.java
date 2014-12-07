@@ -20,7 +20,7 @@ public class EW_WorldGenHandler implements IWorldGenerator
 
 	public EW_WorldGenHandler()
 	{
-		GameRegistry.registerWorldGenerator(this, 100);
+		GameRegistry.registerWorldGenerator(this, 0);
 		DarkStoneGen = new DarkStoneGenerator();
 		FarmerHut = new FarmerHutGenerator();
 		// ChestGen = new ChestGenerator();
@@ -40,7 +40,7 @@ public class EW_WorldGenHandler implements IWorldGenerator
 		{
 			// DarkStoneGen.generate(world, random, chx, 9, chz);
 		}
-		if (random.nextInt(100) == 0)
+		if (random.nextInt(35) == 0)
 		{
 			// if (BiomeDictionary.isBiomeOfType(Biome, Type.PLAINS))
 			// {
