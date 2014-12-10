@@ -41,7 +41,7 @@ public class FarmerHutGenerator extends WorldGenerator
 
 		return false;
 	}
-	
+
 	public static boolean buildingCreation(World world, Random rand, int x, int y, int z)
 	{
 		int base = world.getTopSolidOrLiquidBlock(x, z);
@@ -217,7 +217,7 @@ public class FarmerHutGenerator extends WorldGenerator
 				}
 			}
 		}
-		
+
 		pastureFilling(world, rand, x, base, z);
 
 		return true;
@@ -244,7 +244,7 @@ public class FarmerHutGenerator extends WorldGenerator
 
 		return false;
 	}
-	
+
 	public static boolean solidBlock(World world, int x, int y, int z)
 	{
 		Block block = world.getBlock(x, y, z);
@@ -254,22 +254,21 @@ public class FarmerHutGenerator extends WorldGenerator
 		}
 		return true;
 	}
-	
+
 	public static boolean pastureFilling(World world, Random rand, int x, int base, int z)
 	{
-		for(int i = 0; i < 6; i++)
+		for (int i = 0; i < 6; i++)
 		{
 			if (rand.nextInt(6) != 0)
 			{
 				int posX = rand.nextInt(3) + 2;
 				int posY = rand.nextInt(3) + 2;
 				EntityCow entitycow = new EntityCow(world);
-                entitycow.setLocationAndAngles((double)x + posX, (double)base + 1, (double)z + posY, 0.0F, 0.0F);
-                world.spawnEntityInWorld(entitycow);
+				entitycow.setLocationAndAngles((double) x + posX, (double) base + 1, (double) z + posY, 0.0F, 0.0F);
+				world.spawnEntityInWorld(entitycow);
 			}
 		}
 		return true;
 	}
-
 
 }

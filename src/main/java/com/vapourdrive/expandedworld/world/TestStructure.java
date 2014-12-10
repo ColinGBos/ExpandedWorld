@@ -7,7 +7,7 @@ public class TestStructure extends MapGenStructure
 {
 	public TestStructure()
 	{
-		
+
 	}
 
 	@Override

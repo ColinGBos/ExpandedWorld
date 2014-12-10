@@ -7,7 +7,7 @@ public class FoodChest
 {
 	public static int amount = 1;
 	public static int chance = 1;
-	
+
 	public static WeightedRandomChestContent[] farmerchest = new WeightedRandomChestContent[]
 	{
 			new WeightedRandomChestContent(Items.saddle, 0, 1, 1, 2 * chance),

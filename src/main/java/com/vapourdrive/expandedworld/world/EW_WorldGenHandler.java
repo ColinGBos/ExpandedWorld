@@ -49,7 +49,7 @@ public class EW_WorldGenHandler implements IWorldGenerator
 			// {
 			FarmerHut.generate(world, random, chx, world.getChunkHeightMapMinimum(chx, chz), chz);
 			// }
-			if(!teststructure.hasStructureAt(chx, 20, chz))
+			if (!teststructure.hasStructureAt(chx, 20, chz))
 			{
 				teststructure.generateStructuresInChunk(world, random, chx, chz);
 			}

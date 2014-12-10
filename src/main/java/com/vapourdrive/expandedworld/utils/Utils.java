@@ -97,14 +97,14 @@ public class Utils
 		}
 		return 1;
 	}
-	
+
 	public static boolean isLevelGround(World world, Random rand, int x, int maxX, int z, int maxZ, int difference)
 	{
 		int i;
 		int j;
 		int minHeight = world.getTopSolidOrLiquidBlock(x, z);
 		int maxHeight = minHeight;
-		
+
 		for (i = -2; i < maxX; i++)
 		{
 			for (j = -2; j < maxZ; j++)
@@ -120,12 +120,12 @@ public class Utils
 				}
 			}
 		}
-		
+
 		if ((maxHeight - minHeight) < difference)
 		{
 			return true;
 		}
-		
+
 		return false;
 	}
 }
